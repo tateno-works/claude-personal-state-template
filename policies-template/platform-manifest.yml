@@ -1,0 +1,18 @@
+# Platform registry. Each entry maps a platform name to its semgrep ruleset.
+# Hooks read this to determine which ruleset to run for a given file.
+
+platforms: []
+# Example:
+# platforms:
+#   - name: dify
+#     ruleset: semgrep/dify.yml
+#     file_patterns:
+#       - "**/*.yml"
+#       - "**/*.yaml"
+#     description: "Dify Cloud workflow YAML — detect LLM-bypass anti-patterns"
+#
+#   - name: stripe
+#     ruleset: semgrep/stripe.yml
+#     file_patterns:
+#       - "**/*.{ts,js,py}"
+#     description: "Stripe SDK usage — detect anti-patterns and missing error handling"

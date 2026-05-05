@@ -1,0 +1,30 @@
+# For Layer 2 state repos. Copy this to your private repo.
+# Excludes ephemeral state, keeps memory/policies/CLAUDE.md.
+
+# Backups created by setup.sh
+*.bak.*
+
+# Ephemeral
+logs/
+cache/
+state/
+*.log
+*.tmp
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Secrets (defense in depth — none should be in here)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+op-env.conf

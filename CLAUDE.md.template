@@ -1,0 +1,17 @@
+# Claude Code Personal Instructions
+
+This file is loaded as user-global instructions for all Claude Code sessions.
+Edit freely. Project-level `CLAUDE.md` overrides individual entries.
+
+## Language
+- Respond in <your preferred language>.
+- Code identifiers in English. Comments in <your preferred language>.
+
+## Style
+<!-- Add your defaults: tone, response length, code style preferences -->
+
+## Workflow
+<!-- Add your defaults: branching, commit, review preferences -->
+
+## Project Pointers
+<!-- Add absolute paths to active project CLAUDE.md / docs you want auto-loaded -->

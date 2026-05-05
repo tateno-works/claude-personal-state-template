@@ -1,0 +1,12 @@
+# Exception registry — one entry per finding.
+# Limits enforced by hooks: ≤10 active total, ≤2 new per commit, expires ≤30 days.
+exceptions: []
+# Example:
+# exceptions:
+#   - rule_id: dify-http-llm-bypass
+#     file: workflows/legacy.yml
+#     owner: octocat
+#     reason: "legacy migration in progress, see ADR-0007"
+#     expires: "2026-06-01"
+#     context_link: "https://github.com/example/repo/pull/123"
+#     finding_sha256: "abc123..."
