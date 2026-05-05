@@ -1,0 +1,23 @@
+hooks/personal-state-uncommitted-warn.cjs
+  ea97ce0e39cf6bd7 18,21-49,52-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "ac446ef11ae1589c73c38b80d833b0c3a307063e",
+  "prompts": {
+    "ea97ce0e39cf6bd7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "56f35b87-232c-48a8-a5ae-88eebc853f04",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mustardseed184-sketch",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 33,
+      "overriden_lines": 0
+    }
+  }
+}
