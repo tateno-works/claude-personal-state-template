@@ -81,12 +81,14 @@ echo "PROJECT_NAME:  $PROJECT_NAME"
 echo "MEMORY_TARGET: $MEMORY_DIR_PARENT/memory"
 echo
 
-run() {
+say() {
   if [ "$DRY_RUN" = 1 ]; then
-    echo "DRY: $*"
-  else
-    eval "$@"
+    printf 'DRY: '
+    printf '%q ' "$@"
+    printf '\n'
+    return 0
   fi
+  "$@"
 }
 
 # Convert MSYS path to Windows path for cmd /c mklink
@@ -103,7 +105,7 @@ backup_if_real() {
   local path="$1"
   if [ -L "$path" ]; then
     if [ "$FORCE" = 1 ]; then
-      run "rm -f \"$path\""
+      say rm -f "$path"
     else
       echo "SKIP (already symlink): $path  (use --force to overwrite)"
       return 1
@@ -113,9 +115,19 @@ backup_if_real() {
     ts="$(date +%Y%m%d-%H%M%S)"
     local bak="${path}.bak.${ts}"
     echo "BACKUP: $path -> $bak"
-    run "mv \"$path\" \"$bak\""
+    say mv "$path" "$bak"
   fi
   return 0
+}
+
+# Run mklink via cmd.exe. Bash arrays preserve backslashes correctly across argv.
+mklink_win() {
+  local flag="$1" dst_w="$2" src_w="$3"
+  if [ "$DRY_RUN" = 1 ]; then
+    printf 'DRY: cmd //c mklink %s %q %q\n' "$flag" "$dst_w" "$src_w"
+    return 0
+  fi
+  cmd //c mklink "$flag" "$dst_w" "$src_w"
 }
 
 link_path() {
@@ -143,9 +155,9 @@ link_path() {
     else
       flag="/H"  # hard link (no admin needed)
     fi
-    run "cmd //c \"mklink $flag \\\"$dst_w\\\" \\\"$src_w\\\"\""
+    mklink_win "$flag" "$dst_w" "$src_w"
   else
-    run "ln -s \"$src\" \"$dst\""
+    say ln -s "$src" "$dst"
   fi
   echo "LINK: $dst -> $src"
 }

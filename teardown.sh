@@ -55,12 +55,23 @@ project_dir_native() {
 PROJECT_NAME="$(encode_project_dir "$(project_dir_native "$PROJECT_DIR")")"
 MEMORY_DIR="$CLAUDE_HOME/projects/$PROJECT_NAME/memory"
 
-run() {
+say() {
   if [ "$DRY_RUN" = 1 ]; then
-    echo "DRY: $*"
-  else
-    eval "$@"
+    printf 'DRY: '
+    printf '%q ' "$@"
+    printf '\n'
+    return 0
   fi
+  "$@"
+}
+
+rmdir_win() {
+  local path_w="$1"
+  if [ "$DRY_RUN" = 1 ]; then
+    printf 'DRY: cmd //c rmdir %q\n' "$path_w"
+    return 0
+  fi
+  cmd //c rmdir "$path_w"
 }
 
 unlink_one() {
@@ -72,11 +83,11 @@ unlink_one() {
   fi
   if [ -L "$path" ]; then
     echo "UNLINK: $path"
-    run "rm -f \"$path\""
+    say rm -f "$path"
   elif [ "$OS" = windows ] && [ "$kind" = dir ] && [ -d "$path" ]; then
     # Junctions appear as dirs but rmdir removes the link only
     echo "UNLINK (junction): $path"
-    run "cmd //c \"rmdir \\\"$(cygpath -w "$path")\\\"\""
+    rmdir_win "$(cygpath -w "$path")"
   else
     echo "SKIP (not a link): $path"
     return
@@ -87,7 +98,7 @@ unlink_one() {
     latest="$(ls -1dt "${path}.bak."* 2>/dev/null | head -n1 || true)"
     if [ -n "$latest" ]; then
       echo "RESTORE: $latest -> $path"
-      run "mv \"$latest\" \"$path\""
+      say mv "$latest" "$path"
     fi
   fi
 }
