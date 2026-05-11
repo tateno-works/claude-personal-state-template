@@ -1,0 +1,21 @@
+hooks/README.md
+  s_3d808507fb0397::t_207d3c7ce8ba35 37-117
+hooks/github-name-guard.cjs
+  s_3d808507fb0397::t_145e36fc6621b3 1-224
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "70d07190266e68d1604573163c4daba09c72c5f5",
+  "prompts": {},
+  "sessions": {
+    "s_3d808507fb0397": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7f88cec6-cc41-415c-91fe-55594325b5a0",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "mustardseed184-sketch <mustardseed184-sketch@users.noreply.github.com>"
+    }
+  }
+}
